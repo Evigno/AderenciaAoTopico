@@ -13,7 +13,7 @@ def essayPromptConv(prompt_path):
         title = root.find('title').text.strip() if root.find('title') is not None else ''
         text = root.find('body').text.strip() if root.find('body') is not None else ''
         
-        return (title, text)
+        return (title + " " + text)
     except ET.ParseError as e:
         print(f"Error parsing {prompt_path}: {e}")
         return ('', '')
@@ -62,7 +62,7 @@ def process_essays(dir_path):
                         formatted_body = '\n'.join(line.strip() for line in body_text.split('. ') if line)
                         
                         # Append title, formatted body, and prompt data to the essays list
-                        essays_list.append((title, formatted_body, prompt_data))
+                        essays_list.append((title + " " + formatted_body, prompt_data))
                 except ET.ParseError as e:
                     print(f"Error parsing {file_name}: {e}")
                     
