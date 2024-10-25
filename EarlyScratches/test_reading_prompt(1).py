@@ -2,7 +2,12 @@ import os
 import unittest
 
 # texto de uma redação sem tags e sem trechos corrigidos. Aqui a redação contém os erros originais do aluno
+#<<<<<<< HEAD
+
+#tag title + texto da tag body => cada redação lida
+#=======
 # contem o titulo e o corpo da redacao
+#>>>>>>> 6c83a7a6b4aa5f52d46490bf52019bc01fb662a5
 redacao_sample = """A Aids ainda não acabou
 O vírus HIV é o assassino de grandes nomes como Cazuza e Freddie Mercury. 
 A síndrome da imunodeficiência adquirida (AIDS), causada por ele, é um mal que ataca o sistema imunológico das vítimas e acabou com milhares de vidas no último século. 
@@ -18,11 +23,19 @@ Portanto, o fato de conhecer o outro e a aparência saudável deste não fazem u
 Enquanto a ciência, que tem trabalhado arduamente, não encontra a cura e a vacina da Aids é fundamental alertar a população, por meio de campanhas na mídia e nas escolas, a fim de impedir que o descaso e a falta de informação espalhem mais ainda esse mal.
 """
 
+#<<<<<<< HEAD
+#As notas por competencia -> array com 5 notas => cada redação lida
+nota_sample = 2.0
+
+
+#titulo da descrição <title>  + descrição da redação <body> = prompt.xml
+#=======
 # competencia:  Compreender a proposta da redação e aplicar conceito das várias áreas de conhecimento para desenvolver o tema,
 # dentro dos limites estruturais do texto dissertativo-argumentativo.
 nota_sample = 2.0
 
 # titulo + corpo do tema de redacao
+#>>>>>>> 6c83a7a6b4aa5f52d46490bf52019bc01fb662a5
 prompt_sample = """
 A Aids não é mais a mesma? Por que diminuiu o medo da doença?
 
@@ -42,6 +55,11 @@ class TestPromptAderencia(unittest.TestCase):
 
         # a funcao deve ter o caminho da redação e o caminho para o prompt
         # e deve retornar o texto puro dos
+#<<<<<<< HEAD
+        #gerar um único arquivo CSV => redacao_sample;nota1;nota2;nota3;nota4;nota5;prompt_sample
+        #O path do arquivo csv
+#=======
+#>>>>>>> 6c83a7a6b4aa5f52d46490bf52019bc01fb662a5
         redacao, nota, prompt = leitura_redacao(os.path.join(redacao_dir,"xml","a-aids-ainda-nao-acabou.xml"),
                         os.path.join(redacao_dir,"prompt.xml"))
 
