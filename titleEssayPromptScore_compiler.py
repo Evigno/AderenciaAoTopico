@@ -2,7 +2,13 @@ import xml.etree.ElementTree as ET
 import os
 
 def main():
-    print(process_essays('C:/Users/lsg20/Downloads/dataPROJETO/data'))
+    print(process_essays('C:/Users/lsg20/Downloads/dataPROJETO/data')) #C:/Users/lsg20/Downloads/dataPROJETO - Copy/data
+    
+
+'''def write_values(lst):
+    with open("test.csv","w") as fd:
+        for (essay, prompt, score) in lst:
+            fd.write(f"{essay},{prompt},{score}\n")'''
 
 def essayPromptConv(prompt_path):
     # Process the prompt.xml file and return relevant data
@@ -41,6 +47,15 @@ def process_essays(dir_path):
                     title_element = root.find('title')
                     title = title_element.text.strip() if title_element is not None and title_element.text else ''
                     
+                    # Extract the second <grade> from within <skills>
+                    score = ''
+                    skills = root.find('skills')
+                    if skills is not None:
+                        # Gather all <grade> tags in order
+                        grades = [skill.find('grade').text.strip() for skill in skills if skill.find('grade') is not None]
+                        if len(grades) >= 2:  # Check if there is a second <grade> element
+                            score = grades[1]
+                    
                     # Extract <body> and initialize content
                     body = root.find('body')
                     text_content = []
@@ -62,10 +77,14 @@ def process_essays(dir_path):
                         formatted_body = '\n'.join(line.strip() for line in body_text.split('. ') if line)
                         
                         # Append title, formatted body, and prompt data to the essays list
-                        essays_list.append((title + " " + formatted_body, prompt_data))
+                        essays_list.append((title + " " + formatted_body, prompt_data, score))
                 except ET.ParseError as e:
                     print(f"Error parsing {file_name}: {e}")
-                    
+    
+    with open("test.csv", "w") as fd:
+            for (essay, prompt, score) in essays_list:
+                fd.write(f"{essay},{prompt},{score}\n")
+
     return essays_list
 
 
